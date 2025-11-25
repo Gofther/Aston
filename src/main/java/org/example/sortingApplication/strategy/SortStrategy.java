@@ -1,4 +1,8 @@
 package org.example.sortingApplication.strategy;
 
-public class SortStrategy {
+import org.example.sortingApplication.domain.Bus;
+
+public interface SortStrategy {
+    Bus[] sort(Bus[] buses);
+    String getDescription();
 }

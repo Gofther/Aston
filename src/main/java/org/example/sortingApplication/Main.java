@@ -4,7 +4,12 @@ import org.example.sortingApplication.domain.Bus;
 import org.example.sortingApplication.domain.BusCollection;
 import org.example.sortingApplication.service.FileService;
 import org.example.sortingApplication.service.InputService;
-import org.w3c.dom.ls.LSOutput;
+import org.example.sortingApplication.service.SortingService;
+import org.example.sortingApplication.strategy.EvenTimSortStrategy;
+import org.example.sortingApplication.strategy.SortStrategy;
+import org.example.sortingApplication.strategy.TimSortStrategy;
+import org.example.sortingApplication.util.BusComparator;
+import org.example.sortingApplication.util.InitComparator;
 
 import java.util.Scanner;
 
@@ -19,6 +24,9 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static InputService inputService = new InputService();
     private static FileService fileService = new FileService();
+
+    private static SortingService sortingService = new SortingService();
+    private static InitComparator initComparator = new InitComparator();
 
     public static void main(String[] args) {
         boolean running = true;
@@ -87,42 +95,61 @@ public class Main {
     }
 
     private static void processCollection(BusCollection collection) {
-        // Здесь будет взаимодействие со стратегиями сортировки
+
         System.out.println("Коллекция создана, размер: " + collection.size());
         // Временный вывод для демонстрации
          for (Bus bus : collection) {
                     System.out.println(bus);
                 }
-        System.out.println("Как бы вы хотели сортировать ваш список?");
-        System.out.println("1. пузырьком");
-        System.out.println("2. Косая");
-        System.out.println("3. Березовая");
-        System.out.println("4. назад");
+         boolean running = true;
+        while (running) {
+            System.out.println("Как бы вы хотели сортировать ваш список?");
+            System.out.println("1. TimSort");
+            System.out.println("2. TimSort, но только для четных элементов (доп. задание)");
+            System.out.println("3. назад");
+            System.out.print("Выберите пункт: ");
 
-        System.out.print("Выберите пункт: ");
+            String choice = scanner.next();
 
-        String choice = scanner.nextLine();
+            if (!choice.matches("[1-3]")) {
+                System.out.println("Можно вводить только числа от 1 до 3");
+                continue;
+            }
 
-        switch (choice) {
-            case "1":
-                System.out.println("сортировка пузырьком");
-                System.out.println("safsafsa");
-                break;
-            case "2":
-                System.out.println("Косая сортировка");
-                System.out.println("xzcscsac");
-                break;
-            case "3":
-                System.out.println("Березовая сортировка");
-                System.out.println("xzcscsac");
-                break;
-            case "4":
-                System.out.println("Возвращаемся назад!!!");
-                break;
+            if (choice.equals("3")) {
+                running=false;
+                continue;
+            }
+
+            SortStrategy strategy = null; //экземпляр интерфейса сортировки
+
+            BusComparator comparator = initComparator.init(scanner);//задаем порядок полей для сортировки
+
+            if(comparator == null)
+            {
+                continue;
+            }
+
+            switch (choice) {
+                case "1":
+                    strategy = new TimSortStrategy(comparator); //выбираем стратегию сортировки
+                    break;
+                case "2":
+                    strategy = new EvenTimSortStrategy(comparator);
+                    break;
+                case "4":
+                    System.out.println("Возвращаемся назад!!!");
+                    break;
+            }
+            sortingService.setStrategy(strategy);//устанавливаем стратегию сортировки
+
+            collection.setBuses(sortingService.performSort(collection.toArray()));//сортируем массив из коллекции и сразу записываем его обратно
+            //такой подход позволяет добавлять новые стратегии сортировки с минимальным изменением кода
+            System.out.println("Отсортированный список");
+            for (Bus bus : collection) {
+                System.out.println(bus);
+            }
         }
-
-
-        System.out.println();
-        System.out.println("Тут будет сортировка");
     }
+
 }

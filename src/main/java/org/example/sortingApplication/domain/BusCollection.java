@@ -1,17 +1,16 @@
 package org.example.sortingApplication.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class BusCollection implements Iterable<Bus> {
-    private Object[] buses;
+    private Bus[] buses;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
     public BusCollection() {
-        buses = new Object[DEFAULT_CAPACITY];
+        buses = new Bus[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -31,13 +30,13 @@ public class BusCollection implements Iterable<Bus> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        return (Bus) buses[index];
+        return buses[index];
     }
 
     public int size() { return size; }
 
     private void resize() {
-        Object[] newArray = new Object[buses.length * 2];
+        Bus[] newArray = new Bus[buses.length * 2];
         System.arraycopy(buses, 0, newArray, 0, size);
         buses = newArray;
     }
@@ -61,11 +60,19 @@ public class BusCollection implements Iterable<Bus> {
 
     // Stream support (Доп. задание 3)
     public Stream<Bus> stream() {
-        List<Bus> list = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            list.add(get(i));
-        }
-        return list.stream();
+        return Arrays.stream(buses, 0, size);
+    }
+
+    public Bus[] toArray() { //нужен потому что поу молчанию размер массива 10, если элементов будет, то остальные будут null, что ломает сортировку
+        return Arrays.copyOf(buses, size);//копируются только не пустые элементы
+    }
+
+    public void setBuses(Bus[] buses) {
+        this.buses = buses;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
     }
 }
 

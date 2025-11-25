@@ -13,6 +13,13 @@ public class Bus {
         this.mileage = builder.mileage;
     }
 
+
+    public Bus(String busNumber, String model, int mileage) {
+        this.busNumber = busNumber;
+        this.model = model;
+        this.mileage = mileage;
+    }
+
     // Геттеры
     public String getBusNumber() { return busNumber; }
     public String getModel() { return model; }
