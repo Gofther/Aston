@@ -31,9 +31,6 @@ public class Bus {
         private String model;
         private int mileage;
 
-        //по хорошему методы должны называться иначе, так как это не сеттеры, а методы билдера, т.е. не setBusNumber, а просто busNumber
-        //но в целом пофиг
-
         public Builder setBusNumber(String busNumber) {
             this.busNumber = busNumber;
             return this;
