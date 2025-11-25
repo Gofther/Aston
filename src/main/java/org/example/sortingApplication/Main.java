@@ -10,6 +10,8 @@ import org.example.sortingApplication.strategy.SortStrategy;
 import org.example.sortingApplication.strategy.TimSortStrategy;
 import org.example.sortingApplication.util.BusComparator;
 import org.example.sortingApplication.util.InitComporator;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {

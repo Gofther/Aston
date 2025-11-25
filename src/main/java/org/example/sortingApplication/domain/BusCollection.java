@@ -70,5 +70,9 @@ public class BusCollection implements Iterable<Bus> {
     public void setBuses(Bus[] buses) {
         this.buses = buses;
     }
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
 }
 

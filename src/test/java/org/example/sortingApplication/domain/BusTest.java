@@ -1,7 +1,5 @@
-package org.example.sortingApplication;
+package org.example.sortingApplication.domain;
 
-import org.example.sortingApplication.domain.Bus;
-import org.example.sortingApplication.domain.BusCollection;
 import org.example.sortingApplication.service.ValidationService;
 
 public class BusTest {

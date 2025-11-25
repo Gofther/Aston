@@ -13,6 +13,13 @@ public class Bus {
         this.mileage = builder.mileage;
     }
 
+
+    public Bus(String busNumber, String model, int mileage) {
+        this.busNumber = busNumber;
+        this.model = model;
+        this.mileage = mileage;
+    }
+
     // Геттеры
     public String getBusNumber() { return busNumber; }
     public String getModel() { return model; }
@@ -23,6 +30,9 @@ public class Bus {
         private String busNumber;
         private String model;
         private int mileage;
+
+        //по хорошему методы должны называться иначе, так как это не сеттеры, а методы билдера, т.е. не setBusNumber, а просто busNumber
+        //но в целом пофиг
 
         public Builder setBusNumber(String busNumber) {
             this.busNumber = busNumber;

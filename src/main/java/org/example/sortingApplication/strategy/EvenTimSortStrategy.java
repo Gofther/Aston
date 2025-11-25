@@ -13,7 +13,7 @@ public class EvenTimSortStrategy implements SortStrategy {
     public EvenTimSortStrategy(Comparator<Bus> comparator) {
         this.comparator = comparator;
     }
-
+//я решил отделить четные элементы, отсортировать их, а потом вернуть на свои места
     @Override
     public Bus[] sort(Bus[] buses) {
         TimSortStrategy timSortStrategy = new TimSortStrategy(comparator);
@@ -21,7 +21,6 @@ public class EvenTimSortStrategy implements SortStrategy {
         // 1. Собираем четные автобусы и их позиции
         BusCollection evens = new BusCollection();
         List<Integer> positions = new ArrayList<>();
-
         for(int i = 0; i < buses.length; i++) {
             if(buses[i] != null && buses[i].getMileage() % 2 == 0) {
                 evens.add(buses[i]);

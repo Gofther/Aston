@@ -7,13 +7,13 @@ public class SortingService {
     private SortStrategy strategy;
 
     public void setStrategy(SortStrategy strategy) {
-        this.strategy = strategy;  // ✅ Устанавливаем стратегию
+        this.strategy = strategy;
     }
 
     public Bus[] performSort(Bus[] buses) {
         if (strategy == null) {
             throw new IllegalStateException("Стратегия не установлена");
         }
-        return strategy.sort(buses);  // ✅ Вызываем алгоритм через интерфейс
+        return strategy.sort(buses);
     }
 }
