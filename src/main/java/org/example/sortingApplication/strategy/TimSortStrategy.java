@@ -48,7 +48,7 @@ public class TimSortStrategy implements SortStrategy {
     /**
      * Сортировка вставками для маленьких подмассивов
      */
-    private void insertionSort(Bus[] array, int left, int right) {
+    public void insertionSort(Bus[] array, int left, int right) {
         for (int i = left + 1; i <= right; i++) {
             Bus current = array[i];
             int j = i - 1;

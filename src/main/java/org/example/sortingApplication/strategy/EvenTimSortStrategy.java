@@ -16,6 +16,9 @@ public class EvenTimSortStrategy implements SortStrategy {
 //я решил отделить четные элементы, отсортировать их, а потом вернуть на свои места
     @Override
     public Bus[] sort(Bus[] buses) {
+        if (buses == null || buses.length <= 1) {
+            return buses;
+        }
         TimSortStrategy timSortStrategy = new TimSortStrategy(comparator);
 
         // 1. Собираем четные автобусы и их позиции
